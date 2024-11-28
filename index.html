@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анимированная Машинка</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #87CEEB; /* Цвет неба */
+            overflow: hidden; /* Скрыть полосу прокрутки */
+        }
+
+        .car {
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            left: -200px; /* Начальная позиция за пределами экрана */
+            animation: move 5s linear; /* Анимация движения */
+        }
+
+        .body {
+            width: 100%;
+            height: 100%;
+            background-color: #DC143C; /* Цвет кузова */
+            border-radius: 20px; /* Закругление кузова */
+            position: relative;
+        }
+
+        .window {
+            width: 50px;
+            height: 30px;
+            background-color: #FFFFFF; /* Цвет окон */
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            border-radius: 5px; /* Закругление окон */
+        }
+
+        .wheel-front,
+        .wheel-back {
+            width: 30px;
+            height: 30px;
+            background-color: #000000; /* Цвет колес */
+            border-radius: 50%; /* Круглые колеса */
+            position: absolute;
+            bottom: 10px; /* Расположение колес */
+        }
+
+        .wheel-front {
+            left: 20px; /* Позиция переднего колеса */
+        }
+
+        .wheel-back {
+            left: 150px; /* Позиция заднего колеса */
+        }
+
+        @keyframes move {
+            0% {
+                left: -200px; /* Начальная позиция */
+            }
+            100% {
+                left: calc(100% - 250px); /* Конечная позиция */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="car">
+        <div class="body">
+            <div class="window"></div>
+            <div class="wheel-front"></div>
+            <div class="wheel-back"></div>
+        </div>
+    </div>
+
+    <script>
+        const car = document.querySelector('.car');
+
+        function animateCar() {
+            car.style.animation = 'move 5s linear forwards';
+            car.style.left = '-200px'; // Начальная позиция
+
+            car.addEventListener('animationend', () => {
+                car.style.animation = 'none'; // Сброс анимации
+                setTimeout(() => {
+                    animateCar(); // Перезапуск анимации
+                }, 10); // Небольшая задержка перед перезапуском
+            });
+        }
+
+        animateCar();
+    </script>
+</body>
+</html>
